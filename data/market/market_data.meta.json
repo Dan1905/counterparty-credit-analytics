@@ -1,0 +1,12 @@
+{
+  "source": "Yahoo Finance",
+  "retrieved_at": "2026-10-03T23:04:19",
+  "start": "2021-10-04",
+  "end": "2026-10-01",
+  "observations": 1234,
+  "tickers": {
+    "NIFTY50": "^NSEI",
+    "USDINR": "INR=X",
+    "RATE_10Y": "^TNX"
+  }
+}

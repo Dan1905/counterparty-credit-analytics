@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+.pytest_cache/
+logs/
+data/risk.db
+*.pyc
+~$*.xlsx
+.claude/
+.DS_Store

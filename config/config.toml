@@ -1,0 +1,94 @@
+# Counterparty Credit Risk & Exposure Analytics - configuration
+# Every model parameter used by the calculations lives here.
+# Edit a value and re-run `python run_pipeline.py` (or press "Run analysis" in the dashboard).
+
+[general]
+base_currency = "INR"
+random_seed = 42            # seed for synthetic counterparty / trade / financial data
+
+[paths]
+counterparties = "data/counterparties.csv"
+trades = "data/trades.csv"
+financials = "data/financials.csv"
+market_data = "data/market/market_data.csv"
+database = "data/risk.db"
+excel_report = "reports/Risk_Report.xlsx"
+report_csv_dir = "reports/latest"
+log_file = "logs/ccr.log"
+
+[market_data]
+lookback_days = 500         # number of historical scenarios used in the exposure calculation
+volatility_window = 60      # rolling window (days) for the historical-volatility chart
+return_percentiles = [0.01, 0.05, 0.25, 0.50, 0.75, 0.95, 0.99]
+trading_days_per_year = 252
+
+[exposure]
+scenario_horizon_days = 10  # each scenario is an observed move over this many days (1 = daily returns)
+pfe_confidence_levels = [0.95, 0.99]
+# "gross"  : counterparty exposure = sum of positive trade exposures (no netting)
+# "netted" : counterparty exposure = max(sum of trade MTMs, 0) (close-out netting)
+aggregation = "gross"
+
+[initial_margin]
+confidence_level = 0.99     # Z = one-sided normal quantile of this level
+margin_period_days = 10     # T, margin period of risk
+# "historical" : daily volatility of the trade's risk factor from market history
+# "trade"      : the annualised volatility stored on each trade
+volatility_source = "historical"
+net_within_risk_factor = true   # offset long/short sensitivities to the same factor per counterparty
+
+# Optional overrides of the daily risk-factor volatility (decimal), e.g. NIFTY50 = 0.012
+[initial_margin.volatility_overrides]
+
+[limits]
+warning_threshold = 0.80    # default utilisation at which a counterparty moves to Warning
+breach_threshold = 1.00     # utilisation at which a counterparty is in Breach
+
+[collateral]
+default_threshold = 5000000.0
+default_minimum_transfer_amount = 500000.0
+
+[credit_score]
+# Internal analytical risk score: 0 = lowest risk, 100 = highest risk.
+# Each ratio is mapped linearly between `best` (0 risk points) and `worst` (100 risk points),
+# clipped to that range, then combined using the weights below (weights are normalised to 1).
+
+[credit_score.weights]
+debt_to_ebitda = 0.30
+current_ratio = 0.20
+net_margin = 0.20
+debt_to_assets = 0.20
+revenue_growth = 0.10
+
+[credit_score.bounds.debt_to_ebitda]
+best = 1.0
+worst = 6.0
+
+[credit_score.bounds.current_ratio]
+best = 2.0
+worst = 0.8
+
+[credit_score.bounds.net_margin]
+best = 0.20
+worst = 0.0
+
+[credit_score.bounds.debt_to_assets]
+best = 0.15
+worst = 0.70
+
+[credit_score.bounds.revenue_growth]
+best = 0.15
+worst = -0.10
+
+# Upper score bound of each risk category; anything above `elevated` is "High".
+[credit_score.categories]
+low = 30.0
+moderate = 50.0
+elevated = 70.0
+
+[commentary]
+exposure_change_pct = 0.02      # relative day-on-day move that is worth a sentence
+margin_change_pct = 0.01
+high_exposure_utilisation = 0.50  # "high exposure" cut-off for the combined exposure / credit query
+revenue_decline_flag = -0.05
+leverage_flag = 4.0             # Debt / EBITDA above this is called out

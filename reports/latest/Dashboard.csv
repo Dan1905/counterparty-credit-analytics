@@ -1,0 +1,24 @@
+﻿Metric,Value
+Valuation date,2026-10-01
+Market data source,Yahoo Finance
+Counterparties,5
+Trades,25
+Historical scenarios,500
+Scenario horizon (days),10
+Total Current Exposure (₹M),67642180.3
+Total Gross Exposure (₹M),109646779.59
+Total Collateral (₹M),77500000.0
+Total Net Exposure (₹M),32146779.590000004
+Total EE (₹M),127298666.21418184
+Portfolio PFE 95% (₹M),170183436.50572574
+Portfolio PFE 99% (₹M),184283400.3922011
+Sum of counterparty PFE 99% (₹M),234591794.8026052
+Total Initial Margin (₹M),295732538.5878845
+Limit breaches,1
+Limit warnings,1
+Largest exposure,CP002
+Highest PFE,CP001
+Highest utilisation,CP003
+Highest utilisation (%),1.0507695004114876
+Largest increase in exposure,CP002
+Largest increase in exposure (₹M),3309547.8109397776

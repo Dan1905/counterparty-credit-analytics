@@ -1,0 +1,6 @@
+﻿Counterparty ID,Name,Sector,Country,Credit Rating,Credit Limit (₹M),Warning Threshold,Collateral (₹M),Collateral Threshold (₹M),Minimum Transfer Amount (₹M),Internal Credit Score,Risk Category,Limit Status
+CP001,Meridian Infotech Ltd,Technology,India,AA,100000000.0,0.8,24000000.0,10000000.0,1000000.0,5.077817849869122,Low,Normal
+CP002,Suryodaya Steel & Power Ltd,Metals & Mining,India,BBB,55000000.0,0.8,25500000.0,5000000.0,1000000.0,66.7424206999681,Elevated,Warning
+CP003,Blue Harbour Shipping Pte Ltd,Shipping,Singapore,BB+,50000000.0,0.75,24000000.0,5000000.0,500000.0,95.26853904902686,High,Breach
+CP004,Northwind Energy Plc,Energy,United Kingdom,A-,150000000.0,0.8,0.0,10000000.0,1000000.0,37.74848824837716,Moderate,Normal
+CP005,Kaveri Pharma Exports Ltd,Pharmaceuticals,India,A,60000000.0,0.8,4000000.0,7500000.0,500000.0,12.31771808326865,Low,Normal
